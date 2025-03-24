@@ -29,12 +29,17 @@ const Homepage = ({ onLoginSuccess }) => {
   }, []);
 
   const handleFormLogin = async () => {
-    if (defaultCredentials[username] && defaultCredentials[username] === password) {
+    if (
+      defaultCredentials[username] &&
+      defaultCredentials[username] === password
+    ) {
       try {
-        // Fetch user details from the backend
-        const response = await fetch(`http://127.0.0.1:8000/users/${username}`, {
-          method: "GET",
-        });
+        const response = await fetch(
+          `http://127.0.0.1:8000/users/${username}`,
+          {
+            method: "GET",
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch user details");
@@ -42,11 +47,9 @@ const Homepage = ({ onLoginSuccess }) => {
 
         const userDetails = await response.json();
 
-        // Save user details to localStorage
         localStorage.setItem("user", JSON.stringify(userDetails));
         setIsLoggedIn(true);
 
-        // Pass user details to parent component
         onLoginSuccess(userDetails);
 
         // Navigate to MainHomepage
@@ -165,7 +168,9 @@ const Homepage = ({ onLoginSuccess }) => {
               <>
                 {/* Traditional Login Fields */}
                 <div style={{ marginBottom: "10px" }}>
-                  <label style={{ fontWeight: "normal", fontFamily: "-moz-initial" }}>
+                  <label
+                    style={{ fontWeight: "normal", fontFamily: "-moz-initial" }}
+                  >
                     Email:
                     <input
                       type="text"
@@ -185,7 +190,9 @@ const Homepage = ({ onLoginSuccess }) => {
                   </label>
                 </div>
                 <div style={{ marginBottom: "10px" }}>
-                  <label style={{ fontWeight: "normal", fontFamily: "-moz-initial" }}>
+                  <label
+                    style={{ fontWeight: "normal", fontFamily: "-moz-initial" }}
+                  >
                     Password:
                     <input
                       type="password"
@@ -204,7 +211,9 @@ const Homepage = ({ onLoginSuccess }) => {
                     />
                   </label>
                 </div>
-                {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+                {error && (
+                  <p style={{ color: "red", textAlign: "center" }}>{error}</p>
+                )}
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <button
                     style={{
